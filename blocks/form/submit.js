@@ -88,7 +88,7 @@ async function prepareRequest(form) {
     headers['x-adobe-routing'] = `tier=${tier},bucket=${branch}--${site}--${org}`;
     url = baseUrl + btoa(form.dataset.action);
   } else {
-    url = form.dataset.action;
+    url = "https://hyqvia.aemclouddev.takeda.com/primary-immunodeficiency/register/jcr:content.signup.json";
   }
   return { headers, body, url };
 }
