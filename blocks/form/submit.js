@@ -83,7 +83,7 @@ async function prepareRequest(form) {
   const body = { data: payload };
   let url;
   let baseUrl = getSubmitBaseUrl();
-  if (!baseUrl && org && site) {
+  if (false) {
     baseUrl = 'https://forms.adobe.com/adobe/forms/af/submit/';
     headers['x-adobe-routing'] = `tier=${tier},bucket=${branch}--${site}--${org}`;
     url = baseUrl + btoa(form.dataset.action);
