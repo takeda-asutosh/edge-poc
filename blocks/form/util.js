@@ -246,7 +246,7 @@ export function getSitePageName(path) {
 }
 
 export async function getCSRFToken() {
-  const token = await fetch("/libs/granite/csrf/token.json")
+  const token = await fetch("https://qdenga.aemclouddev.takeda.com/libs/granite/csrf/token.json")
       .then(response => response);
   return token.json();
 }
