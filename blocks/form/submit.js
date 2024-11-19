@@ -110,7 +110,7 @@ async function submitDocBasedForm(form, captcha) {
       headers,
       body: JSON.stringify(body),
     });
-    if (response.ok) {
+    if (response.success) {
       submitSuccess(response, form);
     } else {
       const error = await response.text();
