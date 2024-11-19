@@ -1,4 +1,5 @@
 import { DEFAULT_THANK_YOU_MESSAGE, getRouting, getSubmitBaseUrl } from './constant.js';
+import { getCSRFToken } from './util';
 
 export function submitSuccess(e, form) {
   const { payload } = e;
@@ -76,10 +77,13 @@ async function prepareRequest(form) {
   const {
     branch, site, org, tier,
   } = getRouting();
+  let tokenResponse = await getCSRFToken();
   const headers = {
     'Content-Type': 'application/json',
     'x-adobe-routing': `tier=${tier},bucket=${branch}--${site}--${org}`,
+    'CSRF-Token': tokenResponse.token,
   };
+
   const body = { data: payload };
   let url;
   let baseUrl = getSubmitBaseUrl();

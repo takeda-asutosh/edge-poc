@@ -244,3 +244,9 @@ export function getSitePageName(path) {
   const pathArray = mpath.split('/');
   return pathArray[pathArray.length - 1].replaceAll('-', '_');
 }
+
+export async function getCSRFToken() {
+  const token = await fetch("/libs/granite/csrf/token.json")
+      .then(response => response);
+  return token.json();
+}
