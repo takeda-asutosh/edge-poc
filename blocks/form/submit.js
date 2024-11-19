@@ -1,5 +1,5 @@
 import { DEFAULT_THANK_YOU_MESSAGE, getRouting, getSubmitBaseUrl } from './constant.js';
-import { getCSRFToken } from './util';
+import { getCSRFToken } from './util.js';
 
 export function submitSuccess(e, form) {
   const { payload } = e;
