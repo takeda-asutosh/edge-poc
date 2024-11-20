@@ -36,13 +36,7 @@ export default class GoogleReCaptcha {
       const obs = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const { siteKey } = this.config;
-            const url = this.config.uri;
-            if (this.config.version === 'enterprise') {
-              this.#loadScript(`${url}?render=${siteKey}`);
-            } else {
-              this.#loadScript(`https://www.google.com/recaptcha/api.js?render=${siteKey}`);
-            }
+            this.#loadScript('https://www.google.com/recaptcha/api.js');
             obs.disconnect();
           }
         });
@@ -65,21 +59,10 @@ export default class GoogleReCaptcha {
     }
     return new Promise((resolve) => {
       const { grecaptcha } = window;
-      if (this.config.version === 'enterprise') {
-        grecaptcha.enterprise.ready(async () => {
-          const submitAction = `submit_${this.formName}_${this.name}`;
-          const token = await grecaptcha.enterprise.execute(
-            this.config.siteKey,
-            { action: submitAction },
-          );
-          resolve(token);
-        });
-      } else {
         grecaptcha.ready(async () => {
           const token = await grecaptcha.execute(this.config.siteKey, { action: 'submit' });
           resolve(token);
         });
-      }
     });
   }
 }
