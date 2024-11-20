@@ -89,11 +89,7 @@ async function prepareRequest(form) {
 async function submitDocBasedForm(form, captcha) {
   try {
     const { headers, body, url } = await prepareRequest(form, captcha);
-    let token = null;
-    if (captcha) {
-      token = await captcha.getToken();
-      body.data['g-recaptcha-response'] = token;
-    }
+    grecaptcha?.getResponse();
     headers['Content-Type'] = 'application/x-www-form-urlencoded';
     const response = await fetch(url, {
       method: 'POST',
