@@ -96,7 +96,8 @@ async function submitDocBasedForm(form, captcha) {
       headers,
       body: body,
     });
-    if (response.success) {
+    let responseObj = await response.json();
+    if (responseObj.success) {
       submitSuccess(response, form);
     } else {
       const error = await response.text();
