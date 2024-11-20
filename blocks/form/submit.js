@@ -90,10 +90,10 @@ async function submitDocBasedForm(form, captcha) {
   try {
     await grecaptcha?.execute();
     const { headers, body, url } = await prepareRequest(form, captcha);
-    headers['Content-Type'] = 'multipart/form-data';
+    headers['Content-Type'] = 'application/x-www-form-urlencoded';
     const response = await fetch(url, {
       method: 'POST',
-      headers,
+      ...headers,
       body: body,
     });
     let responseObj = await response.json();
