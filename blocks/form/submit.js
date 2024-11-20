@@ -69,7 +69,7 @@ async function prepareRequest(form) {
   } = getRouting();
   let tokenResponse = await getCSRFToken();
   const headers = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/x-www-form-urlencoded",
     'x-adobe-routing': `tier=${tier},bucket=${branch}--${site}--${org}`,
     'CSRF-Token': tokenResponse.token,
   };
