@@ -63,18 +63,17 @@ function constructPayload(form) {
 }
 
 async function prepareRequest(form) {
-  const { payload } = constructPayload(form);
+  const  payload  = constructPayload(form);
   const {
     branch, site, org, tier,
   } = getRouting();
   let tokenResponse = await getCSRFToken();
   const headers = {
     "Content-Type": "application/x-www-form-urlencoded",
-    'x-adobe-routing': `tier=${tier},bucket=${branch}--${site}--${org}`,
     'CSRF-Token': tokenResponse.token,
   };
 
-  const body = { data: payload };
+  const body = payload ;
   let url;
   let baseUrl = getSubmitBaseUrl();
   if (false) {
@@ -98,7 +97,7 @@ async function submitDocBasedForm(form, captcha) {
     const response = await fetch(url, {
       method: 'POST',
       headers,
-      body: JSON.stringify(body),
+      body: body,
     });
     if (response.success) {
       submitSuccess(response, form);

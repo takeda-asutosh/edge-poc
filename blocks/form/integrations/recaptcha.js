@@ -36,13 +36,7 @@ export default class GoogleReCaptcha {
       const obs = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const { siteKey } = this.config;
-            const url = this.config.uri;
-            if (this.config.version === 'enterprise') {
-              this.#loadScript(`${url}?render=${siteKey}`);
-            } else {
-              this.#loadScript(`https://www.google.com/recaptcha/api.js?render=${siteKey}`);
-            }
+            this.#loadScript('https://www.google.com/recaptcha/api.js');
             obs.disconnect();
           }
         });
