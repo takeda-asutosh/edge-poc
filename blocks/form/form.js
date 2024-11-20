@@ -420,7 +420,7 @@ export async function createForm(formDef, data) {
     captcha = new GoogleReCaptcha(config, captchaField.id, captchaField.name, pageName);
     captcha.loadCaptcha(form);
     const formsubmit = form.querySelector('.field-submit');
-    const placeholderCaptcha = createPlaceholderCaptcha(siteKey);
+    const placeholderCaptcha = createPlaceholderCaptcha(config.siteKey);
     form.insertBefore(placeholderCaptcha, formsubmit);
   }
 
