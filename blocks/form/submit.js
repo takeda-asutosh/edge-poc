@@ -69,7 +69,7 @@ async function prepareRequest(form) {
   } = getRouting();
   let tokenResponse = await getCSRFToken();
   const headers = {
-    "Content-Type": "application/x-www-form-urlencoded",
+    'Content-Type': 'application/json',
     'CSRF-Token': tokenResponse.token,
   };
 
@@ -94,6 +94,7 @@ async function submitDocBasedForm(form, captcha) {
       token = await captcha.getToken();
       body.data['g-recaptcha-response'] = token;
     }
+    headers['Content-Type'] = 'application/x-www-form-urlencoded';
     const response = await fetch(url, {
       method: 'POST',
       headers,
