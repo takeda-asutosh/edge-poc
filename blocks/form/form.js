@@ -421,7 +421,7 @@ export async function createForm(formDef, data) {
     captcha.loadCaptcha(form);
     const formsubmit = form.querySelector('.field-submit');
     const placeholderCaptcha = createPlaceholderCaptcha(config.siteKey);
-    form.insertBefore(placeholderCaptcha, formsubmit);
+    form.insertAfter(placeholderCaptcha, formsubmit);
   }
 
   enableValidation(form);
@@ -568,9 +568,7 @@ export default async function decorate(block) {
 function createPlaceholderCaptcha(sitekey) {
   const placeholderCaptcha = document.createElement('div');
   placeholderCaptcha.setAttribute('data-sitekey', sitekey);
-  // eslint-disable-next-line quotes
   placeholderCaptcha.setAttribute('data-badge', "inline");
-  // eslint-disable-next-line quotes
   placeholderCaptcha.setAttribute('data-size', "invisible");
   placeholderCaptcha.classList.add('g-recaptcha');
   return placeholderCaptcha;
