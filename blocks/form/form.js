@@ -421,7 +421,7 @@ export async function createForm(formDef, data) {
     captcha.loadCaptcha(form);
     const formsubmit = form.querySelector('.field-submit');
     const placeholderCaptcha = createPlaceholderCaptcha(config.siteKey);
-    form.insertAfter(placeholderCaptcha, formsubmit);
+    form.insertBefore(placeholderCaptcha, formsubmit);
   }
 
   enableValidation(form);
