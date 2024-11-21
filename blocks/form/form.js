@@ -570,7 +570,7 @@ function createPlaceholderCaptcha(sitekey) {
   placeholderCaptcha.setAttribute('data-sitekey', sitekey);
   placeholderCaptcha.setAttribute('data-badge', "inline");
   placeholderCaptcha.setAttribute('data-size', "invisible");
-  placeholderCaptcha.setAttribute('data-callback',triggerFormSubmit);
+  placeholderCaptcha.setAttribute('data-callback','triggerFormSubmit');
   placeholderCaptcha.classList.add('g-recaptcha');
   return placeholderCaptcha;
 }
