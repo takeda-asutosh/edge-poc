@@ -419,9 +419,9 @@ export async function createForm(formDef, data) {
     const pageName = getSitePageName(captchaField?.properties?.['fd:path']);
     captcha = new GoogleReCaptcha(config, captchaField.id, captchaField.name, pageName);
     captcha.loadCaptcha(form);
-    const formsubmit = form.querySelector('.field-submit');
+    const formsubmit = form.querySelector('button[type=submit]');
     const placeholderCaptcha = createPlaceholderCaptcha(config.siteKey);
-    form.insertBefore(placeholderCaptcha, formsubmit);
+    form.appendChild(placeholderCaptcha, formsubmit);
   }
 
   enableValidation(form);
@@ -570,6 +570,12 @@ function createPlaceholderCaptcha(sitekey) {
   placeholderCaptcha.setAttribute('data-sitekey', sitekey);
   placeholderCaptcha.setAttribute('data-badge', "inline");
   placeholderCaptcha.setAttribute('data-size', "invisible");
+  placeholderCaptcha.setAttribute('data-callback',triggerFormSubmit);
   placeholderCaptcha.classList.add('g-recaptcha');
   return placeholderCaptcha;
+}
+
+window.triggerFormSubmit = function(){
+  let submit = document.querySelector("form button[type=submit]");
+  submit.click()
 }

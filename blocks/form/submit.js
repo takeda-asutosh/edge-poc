@@ -100,10 +100,13 @@ async function submitDocBasedForm(form, captcha) {
     if (responseObj.success) {
       submitSuccess(response, form);
     } else {
+      grecaptcha?.reset();
       const error = await response.text();
       throw new Error(error);
+
     }
   } catch (error) {
+    grecaptcha?.reset();
     submitFailure(error, form);
   }
 }
