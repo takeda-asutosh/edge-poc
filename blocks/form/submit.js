@@ -104,8 +104,8 @@ async function submitDocBasedForm(form, captcha) {
         throw new Error(error);
       }
     }else{
-      grecaptcha.execute();
       form.querySelector("button[type=submit]").removeAttribute('disabled');
+      grecaptcha.execute();
     }
   } catch (error) {
     grecaptcha?.reset();
