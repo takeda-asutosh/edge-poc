@@ -88,22 +88,23 @@ async function prepareRequest(form) {
 
 async function submitDocBasedForm(form, captcha) {
   try {
-    await grecaptcha?.execute();
-    const { headers, body, url } = await prepareRequest(form, captcha);
-    headers['Content-Type'] = 'application/x-www-form-urlencoded';
-    const response = await fetch(url, {
-      method: 'POST',
-      ...headers,
-      body: body,
-    });
-    let responseObj = await response.json();
-    if (responseObj.success) {
-      submitSuccess(response, form);
-    } else {
-      grecaptcha?.reset();
-      const error = await response.text();
-      throw new Error(error);
-
+    if(grecaptcha.getResponse()){
+      const { headers, body, url } = await prepareRequest(form, captcha);
+      headers['Content-Type'] = 'application/x-www-form-urlencoded';
+      const response = await fetch(url, {
+        method: 'POST',
+        ...headers,
+        body: body,
+      });
+      let responseObj = await response.json();
+      if (responseObj.success) {
+        submitSuccess(response, form);
+      } else {
+        const error = await response.text();
+        throw new Error(error);
+      }
+    }else{
+      grecaptcha.execute();
     }
   } catch (error) {
     grecaptcha?.reset();
