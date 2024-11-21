@@ -114,7 +114,7 @@ async function submitDocBasedForm(form, captcha) {
       }
     } else {
       form.querySelector("button[type=submit]").removeAttribute("disabled");
-      form.setAttribute("data-submitting", "true");
+      form.setAttribute("data-submitting", "false");
       grecaptcha.execute();
     }
   } catch (error) {
